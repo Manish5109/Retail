@@ -5,7 +5,7 @@ package com.infogain.app.service;
 
 import java.util.List;
 
-import com.infogain.app.entity.AppUser;
+import com.infogain.app.entity.Login;
 
 /**
  * @author Manish Kumar
@@ -19,14 +19,14 @@ public interface UserService {
 	 * @param user
 	 * @return
 	 */
-	public AppUser saveUser(AppUser user);
+	public Login saveUser(Login user);
 
 	/**
 	 * Get all users.
 	 * 
 	 * @return
 	 */
-	public List<AppUser> getAllUser();
+	public List<Login> getAllUser();
 
 	/**
 	 * delte user details by Id.
@@ -34,7 +34,7 @@ public interface UserService {
 	 * @param id
 	 * @return
 	 */
-	public String deleteUser(AppUser user);
+	public String deleteUser(Login user);
 
 	
 	/**
@@ -44,5 +44,5 @@ public interface UserService {
 	 * @return
 	 */
 
-	public AppUser saveOrUpdateUser(AppUser user);
+	public Login saveOrUpdateUser(Login user);
 }

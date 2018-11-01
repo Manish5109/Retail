@@ -14,7 +14,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.infogain.app.entity.AppUser;
+import com.infogain.app.entity.Login;
 import com.infogain.app.repository.UserRepository;
 
 /**
@@ -41,7 +41,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 	 */
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		AppUser appUser = userRepository.findByUserName(username);
+		Login appUser = userRepository.findByUserName(username);
 		if (appUser == null) {
 			throw new UsernameNotFoundException(username);
 		}

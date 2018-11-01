@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.infogain.app.entity.AppUser;
+import com.infogain.app.entity.Login;
 import com.infogain.app.exception.AuthenticationException;
 import com.infogain.app.util.JwtUtil;
 
@@ -40,7 +40,7 @@ public class AuthController {
 	 * @return
 	 */
 	@RequestMapping(value = "/auth/login", method = RequestMethod.POST)
-	public String login(@RequestBody AppUser user, HttpServletRequest request) {
+	public String login(@RequestBody Login user, HttpServletRequest request) {
 		User user1 = null;
 		try {
 			Authentication authentication = authenticationManager

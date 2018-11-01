@@ -2,10 +2,10 @@ package com.infogain.app.repository;
 
 import org.springframework.data.repository.CrudRepository;
 
-import com.infogain.app.entity.AppUser;
+import com.infogain.app.entity.Login;
 
-public interface UserRepository extends CrudRepository<AppUser, Long> {
+public interface UserRepository extends CrudRepository<Login, Long> {
 
-	public AppUser findByUserName(String username);
+	public Login findByUserName(String username);
 
 }

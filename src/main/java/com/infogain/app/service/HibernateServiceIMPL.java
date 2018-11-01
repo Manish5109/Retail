@@ -8,6 +8,7 @@ import java.util.List;
 
 import javax.persistence.EntityManagerFactory;
 
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -16,8 +17,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 
-import com.infogain.app.entity.AppUser;
+import com.infogain.app.entity.Login;
 import com.infogain.app.entity.OrderDetail;
+import com.infogain.app.entity.UserDetail;
 import com.infogain.app.exception.AuthenticationException;
 
 
@@ -25,22 +27,34 @@ import com.infogain.app.exception.AuthenticationException;
 public class HibernateServiceIMPL {
 	
 	@Bean
-	public AppUser getUser() {
-		return new AppUser();
+	public Login getUser() {
+		return new Login();
 	}
 	
 	@Autowired
 	private EntityManagerFactory entityManagerFactory;
 	@Autowired
-	private AppUser au;
+	private Login au;
 	
-	public AppUser saveUser(AppUser user) {
+	public Login saveUser(Login login) {
 		Session session = entityManagerFactory.unwrap(SessionFactory.class).openSession();
 		Transaction trx = null;
 		trx = session.beginTransaction();
-		session.save(user);
+		session.save(login);
 		trx.commit();
 		session.close();
+		return login;
+	}
+	
+	public UserDetail saveUserDetail(UserDetail user) {
+		Session session = entityManagerFactory.unwrap(SessionFactory.class).openSession();
+		Transaction trx=null;
+		try {
+			trx =session.beginTransaction();
+			session.save(user);
+		}catch(HibernateException he) {
+			System.out.println(he);
+		}
 		return user;
 	}
 	

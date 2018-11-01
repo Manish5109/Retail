@@ -18,7 +18,7 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.infogain.app.entity.AppUser;
+import com.infogain.app.entity.Login;
 import com.infogain.app.util.JwtUtil;
 
 /**
@@ -44,7 +44,7 @@ public class JWTLoginFilter extends UsernamePasswordAuthenticationFilter {
 	public Authentication attemptAuthentication(HttpServletRequest req, HttpServletResponse res)
 			throws AuthenticationException {
 		try {
-			AppUser appUser = new ObjectMapper().readValue(req.getInputStream(), AppUser.class);
+			Login appUser = new ObjectMapper().readValue(req.getInputStream(), Login.class);
 			return authenticationManager.authenticate(
 					new UsernamePasswordAuthenticationToken(appUser.getUserName(), appUser.getPassword()));
 		} catch (IOException e) {

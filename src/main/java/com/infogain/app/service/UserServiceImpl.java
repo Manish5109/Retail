@@ -12,7 +12,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.infogain.app.entity.AppUser;
+import com.infogain.app.entity.Login;
 import com.infogain.app.repository.UserRepository;
 
 /**
@@ -34,7 +34,7 @@ public class UserServiceImpl implements UserService {
 	 * com.infogain.test.service.UserService#saveUser(com.infogain.test.entity.User)
 	 */
 	@Override
-	public AppUser saveUser(AppUser user) {
+	public Login saveUser(Login user) {
 		LOGGER.debug("Saving user: {}", user);
 		user = userRepository.save(user);
 		user.setPassword("*****");
@@ -47,11 +47,11 @@ public class UserServiceImpl implements UserService {
 	 * @see com.infogain.test.service.UserService#getAllUser()
 	 */
 	@Override
-	public List<AppUser> getAllUser() {
-		Iterator<AppUser> iterator = userRepository.findAll().iterator();
-		List<AppUser> users = new ArrayList<>();
+	public List<Login> getAllUser() {
+		Iterator<Login> iterator = userRepository.findAll().iterator();
+		List<Login> users = new ArrayList<>();
 		while (iterator.hasNext()) {
-			AppUser user = iterator.next();
+			Login user = iterator.next();
 			user.setPassword("*****");
 			users.add(user);
 		}
@@ -67,7 +67,7 @@ public class UserServiceImpl implements UserService {
 	 * User)
 	 */
 	@Override
-	public String deleteUser(AppUser user) {
+	public String deleteUser(Login user) {
 		userRepository.delete(user);
 		return "sucess";
 	}
@@ -81,7 +81,7 @@ public class UserServiceImpl implements UserService {
 	 */
 
 	@Override
-	public AppUser saveOrUpdateUser(AppUser user) {
+	public Login saveOrUpdateUser(Login user) {
 
 		user = userRepository.save(user);
 		user.setPassword("#######");

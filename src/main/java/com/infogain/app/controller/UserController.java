@@ -20,13 +20,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.infogain.app.entity.AppUser;
+import com.infogain.app.entity.Login;
+import com.infogain.app.entity.UserDetail;
 import com.infogain.app.exception.AuthenticationException;
 import com.infogain.app.service.HibernateServiceIMPL;
 import com.infogain.app.service.UserService;
 
 @RestController
-@RequestMapping(value = "/users")
+@RequestMapping(value = "/retail")
 public class UserController {
 
 	@Autowired
@@ -41,10 +42,10 @@ public class UserController {
 	 * @return
 	 */
 	//@RequestMapping(value = "/users/save", method = RequestMethod.POST)
-	@PostMapping
+	@PostMapping(value="/admin")
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
-	public AppUser save(@RequestBody AppUser user, HttpServletRequest request) {
-		return himpl.saveUser(user);
+	public Login save(@RequestBody Login login) {
+		return himpl.saveUser(login);
 	}
 
 	/**
@@ -52,11 +53,12 @@ public class UserController {
 	 * 
 	 * @return
 	 */
-	// @RequestMapping(value = "/users/save1", method = RequestMethod.POST)
-	// @PreAuthorize("hasRole('ROLE_USER')")
-	// public AppUser save1(@RequestBody AppUser user, HttpServletRequest request) {
+	 @PostMapping
+	 @PreAuthorize("hasRole('ROLE_USER')")
+	 public UserDetail save1(@RequestBody UserDetail user) {
 	// return userService.saveUser(user);
-	// }
+		 return user;
+	 }
 
 	/**
 	 * get user details.
@@ -65,7 +67,7 @@ public class UserController {
 	 */
 	//@RequestMapping(value = "/users/allUser", method = RequestMethod.POST)
 	@GetMapping
-	public List<AppUser> getAllUser() {
+	public List<Login> getAllUser() {
 		return userService.getAllUser();
 	}
 	/**
@@ -77,7 +79,7 @@ public class UserController {
 	//@RequestMapping(value = "/users/delete", method = RequestMethod.POST)
 	@DeleteMapping
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
-	public String deleteUser(@RequestBody AppUser user, HttpServletRequest request) {
+	public String deleteUser(@RequestBody Login user, HttpServletRequest request) {
 		return userService.deleteUser(user);
 	}
 	
@@ -89,7 +91,7 @@ public class UserController {
 	
 	@PatchMapping()
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
-	public AppUser saveOrUpdateUser(@RequestBody AppUser user, HttpServletRequest request) {
+	public Login saveOrUpdateUser(@RequestBody Login user, HttpServletRequest request) {
 		if(user.getId()==null) {
 			throw new AuthenticationException("id could not be null", null);
 		}
